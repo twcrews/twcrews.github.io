@@ -1,23 +1,22 @@
 import React from 'react';
 import './App.css';
 import * as Material from '@material-ui/core';
-import * as Icon from '@material-ui/icons';
+import { makeStyles } from '@material-ui/core/styles';
+import { Logo } from './logo';
 
 function App() {
+
+  const useStyles = makeStyles()
+
   return (
     <div className="Layout">
       <Material.AppBar position="static">
-        <Material.Toolbar>
-          <Material.IconButton
-            edge="start" 
-            color="inherit"
-          >
-            <Icon.Menu />
-          </Material.IconButton>
+        <Material.Toolbar className="NavBar">
+          <Logo />
           <Material.Typography 
             variant="h6" 
           >
-            News
+            Tommy Crews
           </Material.Typography>
           <Material.Button color="inherit">
             Login
