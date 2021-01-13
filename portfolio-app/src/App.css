@@ -1,7 +1,8 @@
 .Layout {
   display: grid;
   grid-template-rows: auto 1fr;
-  overflow: hidden;
+  overflow: auto;
+  height: 100vh;
 }
 
 .NavLogo {
@@ -10,9 +11,18 @@
 }
 
 .NavBar {
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  justify-content: space-between;
+}
+
+.NavItems {
+  display: flex;
   gap: 20px;
   align-items: center;
+}
+
+.AboutSection {
+  padding: 40px 0;
+  text-align: center;
+  background-color: #00b9ff;
+  color: white;
 }
