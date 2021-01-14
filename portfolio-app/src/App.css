@@ -1,8 +1,6 @@
 .Layout {
   display: grid;
   grid-template-rows: auto 1fr;
-  overflow: auto;
-  height: 100vh;
 }
 
 .NavLogo {
@@ -25,4 +23,8 @@
   text-align: center;
   background-color: #00b9ff;
   color: white;
+}
+
+.add-shadow {
+  box-shadow: 0 0 4px 0 (0, 0, 0, 1);
 }

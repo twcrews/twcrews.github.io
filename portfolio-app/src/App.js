@@ -1,26 +1,49 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import * as Material from '@material-ui/core';
 import { Logo } from './logo';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 function App() {
-  const [scrolled, setScrolled] = useState(false);
+  const [shadowNav, setShadowNav] = useState(false);
+  const [currentThing, setCurrentThing] = useState(0);
 
-  const handleScroll = () => {
-    setScrolled(window.pageYOffset)
-  };
+  useScrollPosition(({ _prevPos, currPos }) => {
+    const isScrolled = currPos.y < 0;
+    if (isScrolled !== shadowNav) setShadowNav(isScrolled);
+  }, [shadowNav]);
+
+  const things = [
+    "full stack software.",
+    "desktop applications.",
+    "websites.",
+    "databases.",
+    "software solutions.",
+    "graphics.",
+    "video productions.",
+    "collaborative projects.",
+    "strong teamwork.",
+    "professional products.",
+    "lasting relationships.",
+    "delicious coffee."
+  ];
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll());
-    return function cleanup() {
-      window.removeEventListener('scroll', handleScroll());
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const interval = setInterval(() => {
+      console.log("called: " + currentThing);
+      if (currentThing < things.length - 1) {
+        setCurrentThing(currentThing + 1);
+      } else {
+        setCurrentThing(0);
+      }
+    }, 2000);
+    return (() => clearInterval(interval));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className="Layout">
-      <Material.AppBar position="sticky" elevation={scrolled ? 3 : 0}>
+      <Material.AppBar position="sticky" id="header" elevation={shadowNav ? 3 : 0}>
         <Material.Toolbar className="NavBar">
           <span className="NavItems">
             <Logo />
@@ -50,7 +73,12 @@ function App() {
         <div
           className="AboutSection"
         >
-          <Material.Typography variant="h1">Hello, world!</Material.Typography>
+          <Material.Typography variant="h1" paragraph>Hello, world!</Material.Typography>
+          <Material.Fade>
+            <Material.Typography variant="h4">
+              I engineer {things[currentThing]}
+            </Material.Typography>
+          </Material.Fade>
         </div>
       </div>
     </div>
