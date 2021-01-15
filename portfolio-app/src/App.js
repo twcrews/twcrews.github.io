@@ -3,6 +3,7 @@ import './App.css';
 import * as Material from '@material-ui/core';
 import { Logo } from './logo';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import TextTransition from 'react-text-transition';
 
 function App() {
   const [shadowNav, setShadowNav] = useState(false);
@@ -30,7 +31,6 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("called: " + currentThing);
       if (currentThing < things.length - 1) {
         setCurrentThing(currentThing + 1);
       } else {
@@ -39,11 +39,16 @@ function App() {
     }, 2000);
     return (() => clearInterval(interval));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  });
 
   return (
-    <div className="Layout">
-      <Material.AppBar position="sticky" id="header" elevation={shadowNav ? 3 : 0}>
+    <React.Fragment>
+      <Material.AppBar 
+        position="sticky" 
+        id="header" 
+        elevation={shadowNav ? 3 : 0}
+        className="AppBar"
+      >
         <Material.Toolbar className="NavBar">
           <span className="NavItems">
             <Logo />
@@ -69,19 +74,19 @@ function App() {
           </span>
         </Material.Toolbar>
       </Material.AppBar>
-      <div>
-        <div
-          className="AboutSection"
-        >
-          <Material.Typography variant="h1" paragraph>Hello, world!</Material.Typography>
-          <Material.Fade>
-            <Material.Typography variant="h4">
-              I engineer {things[currentThing]}
-            </Material.Typography>
-          </Material.Fade>
-        </div>
+      <div
+        className="AboutSection"
+      >
+        <Material.Typography variant="h1" paragraph>Hello, world!</Material.Typography>
+        <Material.Typography variant="h4">
+          I engineer&nbsp;
+              <TextTransition
+            text={things[currentThing]}
+            inline
+          />
+        </Material.Typography>
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 

@@ -1,6 +1,5 @@
-.Layout {
-  display: grid;
-  grid-template-rows: auto 1fr;
+.AppBar {
+  text-align: center;
 }
 
 .NavLogo {
@@ -10,6 +9,7 @@
 
 .NavBar {
   justify-content: space-between;
+  max-width: 1280px;
 }
 
 .NavItems {
