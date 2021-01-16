@@ -43,9 +43,9 @@ function App() {
 
   return (
     <React.Fragment>
-      <Material.AppBar 
-        position="sticky" 
-        id="header" 
+      <Material.AppBar
+        position="sticky"
+        id="header"
         elevation={shadowNav ? 3 : 0}
         className="AppBar"
       >
@@ -53,18 +53,25 @@ function App() {
           <span className="NavItems">
             <Logo />
             <Material.Typography
+              className="NavTitle"
               variant="h6"
             >
               Tommy Crews
             </Material.Typography>
           </span>
           <span className="NavItems">
-            <Material.Button color="inherit">
-              About
+            <span className="AnchorButtons">
+              <Material.Button
+                color="inherit"
+              >
+                About
             </Material.Button>
-            <Material.Button color="inherit">
-              Portfolio
+              <Material.Button
+                color="inherit"
+              >
+                Portfolio
             </Material.Button>
+            </span>
             <Material.Button
               color="secondary"
               variant="contained"
@@ -77,8 +84,17 @@ function App() {
       <div
         className="AboutSection"
       >
-        <Material.Typography variant="h1" paragraph>Hello, world!</Material.Typography>
-        <Material.Typography variant="h4">
+        <Material.Typography 
+          variant="h1" 
+          paragraph
+          className="Header"
+        >
+          Hello, world!
+        </Material.Typography>
+        <Material.Typography 
+          variant="h4"
+          className="Subtitle"
+        >
           I engineer&nbsp;
               <TextTransition
             text={things[currentThing]}
@@ -86,6 +102,12 @@ function App() {
           />
         </Material.Typography>
       </div>
+      <iframe 
+        className="ContactForm" 
+        src="https://docs.google.com/forms/d/e/1FAIpQLSd-IRmw1oZIAw2ljJcLWmZ57hcWfmPtxcN7qMgHx59cdqdaxQ/viewform?embedded=true"
+      >
+        Loading…
+      </iframe>
     </React.Fragment>
   );
 }

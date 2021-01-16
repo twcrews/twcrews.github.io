@@ -9,13 +9,18 @@
 
 .NavBar {
   justify-content: space-between;
-  max-width: 1280px;
+  align-items: center;
 }
 
 .NavItems {
   display: flex;
   gap: 20px;
   align-items: center;
+}
+
+.AnchorButtons {
+  display: flex;
+  gap: 20px;
 }
 
 .AboutSection {
@@ -27,4 +32,25 @@
 
 .add-shadow {
   box-shadow: 0 0 4px 0 (0, 0, 0, 1);
+}
+
+.ContactForm {
+  width: 1000px;
+  height: 1000px;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  .NavTitle, .AnchorButtons {
+    display: none;
+  }
+
+  .Header {
+    font-size: 48px !important;
+    font-weight: 400 !important;
+  }
+
+  .Subtitle {
+    font-size: 20px !important;
+  }
 }
