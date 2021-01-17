@@ -1,3 +1,12 @@
+.Multiline {
+  white-space: pre-wrap;
+}
+
+.Top {
+  position: absolute;
+  top: 0;
+}
+
 .AppBar {
   text-align: center;
 }
@@ -50,10 +59,13 @@
   flex: 1 1 0;
   background-color: white;
   border-radius: 15px;
-  height: 600px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   text-align: center;
   padding: 40px;
+}
+
+.AttrContent {
+  color: #666;
 }
 
 .BigIcon {

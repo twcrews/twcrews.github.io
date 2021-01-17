@@ -30,19 +30,23 @@ function App() {
 
   return (
     <React.Fragment>
+      <div 
+        id="top"
+        className="Top"
+      />
       <Material.AppBar
         position="sticky"
-        id="header"
+        id="nav"
         elevation={shadowNav ? 3 : 0}
         className="AppBar"
       >
         <Material.Toolbar className="NavBar">
           <span className="NavItems">
-          <img 
-            className="NavLogo"
-            alt="Logo" 
-            src={Data.Meta.Logo}
-        />
+            <img
+              className="NavLogo"
+              alt="Logo"
+              src={Data.Meta.Logo}
+            />
             <Material.Typography
               className="NavTitle"
               variant="h6"
@@ -52,7 +56,7 @@ function App() {
           </span>
           <span className="NavItems">
             <span className="AnchorButtons">
-              {Data.Meta.Anchors.map(anchor => 
+              {Data.Meta.Anchors.map(anchor =>
                 <Material.Button
                   key={anchor.Name}
                   variant={anchor.Variant}
@@ -70,19 +74,19 @@ function App() {
       <div
         className="AboutSection"
       >
-        <Material.Typography 
-          variant="h1" 
+        <Material.Typography
+          variant="h1"
           paragraph
           className="Header"
         >
           {Data.Header.Title}
         </Material.Typography>
-        <Material.Typography 
+        <Material.Typography
           variant="h4"
           className="Subtitle"
         >
           {Data.Header.SubtitlePrefix}
-              <TextTransition
+          <TextTransition
             text={Data.Header.SubtitleItems[currentThing]}
             inline
           />
@@ -91,20 +95,19 @@ function App() {
       </div>
       <div className="AttributesSection">
         <div className="Attributes">
-          {Data.Attributes.map(attr => 
-            <div className="AttributeTile">
-              <Attribute
-                icon={
-                  <Icon 
-                    fontSize="inherit" 
-                    color="primary"
-                  >
-                    {attr.Icon}
-                  </Icon>}
-                title={attr.Name}
-                content={attr.content}
-              />
-            </div>
+          {Data.Attributes.map(attr =>
+            <Attribute
+              key={attr.Name}
+              icon={
+                <Icon
+                  fontSize="inherit"
+                  color="primary"
+                >
+                  {attr.Icon}
+                </Icon>}
+              title={attr.Name}
+              content={attr.Content}
+            />
           )}
         </div>
       </div>

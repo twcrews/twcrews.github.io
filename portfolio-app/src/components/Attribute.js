@@ -3,18 +3,20 @@ import { Typography } from "@material-ui/core";
 
 export function Attribute(props) {
     return (
-        <React.Fragment>
+        <div 
+            className="AttributeTile"
+        >
             <span className="BigIcon">
                 {props.icon}
-                <Typography variant="h5">
+                <Typography variant="h5" paragraph>
                     {props.title}
                 </Typography>
             </span>
-            <span>
-                <Typography>
+            <span className="Multiline AttrContent">
+                <Typography color="inherit">
                     {props.content}
                 </Typography>
             </span>
-        </React.Fragment>
-    )
+        </div>
+    );
 }
