@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import * as Material from '@material-ui/core';
-import { Logo } from './logo';
+import Icon from '@material-ui/core/Icon';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import TextTransition from 'react-text-transition';
+import Data from './Data.json';
+import { Attribute } from './components/Attribute';
 
 function App() {
   const [shadowNav, setShadowNav] = useState(false);
@@ -14,24 +16,9 @@ function App() {
     if (isScrolled !== shadowNav) setShadowNav(isScrolled);
   }, [shadowNav]);
 
-  const things = [
-    "full stack software.",
-    "desktop applications.",
-    "websites.",
-    "databases.",
-    "software solutions.",
-    "graphics.",
-    "video productions.",
-    "collaborative projects.",
-    "strong teamwork.",
-    "professional products.",
-    "lasting relationships.",
-    "delicious coffee."
-  ];
-
   useEffect(() => {
     const interval = setInterval(() => {
-      if (currentThing < things.length - 1) {
+      if (currentThing < Data.Header.SubtitleItems.length - 1) {
         setCurrentThing(currentThing + 1);
       } else {
         setCurrentThing(0);
@@ -51,33 +38,32 @@ function App() {
       >
         <Material.Toolbar className="NavBar">
           <span className="NavItems">
-            <Logo />
+          <img 
+            className="NavLogo"
+            alt="Logo" 
+            src={Data.Meta.Logo}
+        />
             <Material.Typography
               className="NavTitle"
               variant="h6"
             >
-              Tommy Crews
+              {Data.Meta.Owner}
             </Material.Typography>
           </span>
           <span className="NavItems">
             <span className="AnchorButtons">
-              <Material.Button
-                color="inherit"
-              >
-                About
-            </Material.Button>
-              <Material.Button
-                color="inherit"
-              >
-                Portfolio
-            </Material.Button>
+              {Data.Meta.Anchors.map(anchor => 
+                <Material.Button
+                  key={anchor.Name}
+                  variant={anchor.Variant}
+                  color={anchor.Color}
+                  onClick={() => document.getElementById(anchor.Link)
+                    .scrollIntoView()}
+                >
+                  {anchor.Name}
+                </Material.Button>
+              )}
             </span>
-            <Material.Button
-              color="secondary"
-              variant="contained"
-            >
-              Contact
-            </Material.Button>
           </span>
         </Material.Toolbar>
       </Material.AppBar>
@@ -89,25 +75,39 @@ function App() {
           paragraph
           className="Header"
         >
-          Hello, world!
+          {Data.Header.Title}
         </Material.Typography>
         <Material.Typography 
           variant="h4"
           className="Subtitle"
         >
-          I engineer&nbsp;
+          {Data.Header.SubtitlePrefix}
               <TextTransition
-            text={things[currentThing]}
+            text={Data.Header.SubtitleItems[currentThing]}
             inline
           />
         </Material.Typography>
+        <div className="HeaderSpacer" />
       </div>
-      <iframe 
-        className="ContactForm" 
-        src="https://docs.google.com/forms/d/e/1FAIpQLSd-IRmw1oZIAw2ljJcLWmZ57hcWfmPtxcN7qMgHx59cdqdaxQ/viewform?embedded=true"
-      >
-        Loading…
-      </iframe>
+      <div className="AttributesSection">
+        <div className="Attributes">
+          {Data.Attributes.map(attr => 
+            <div className="AttributeTile">
+              <Attribute
+                icon={
+                  <Icon 
+                    fontSize="inherit" 
+                    color="primary"
+                  >
+                    {attr.Icon}
+                  </Icon>}
+                title={attr.Name}
+                content={attr.content}
+              />
+            </div>
+          )}
+        </div>
+      </div>
     </React.Fragment>
   );
 }

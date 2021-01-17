@@ -4,19 +4,9 @@ import './index.css';
 import './App.css';
 import App from './App';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { pink } from '@material-ui/core/colors';
+import Data from './Data.json';
 
-let theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: '#6aebff',
-      main: '#00b9ff',
-      dark: '#0089cb',
-      contrastText: '#fff',
-  },
-    secondary: pink
-  }
-});
+let theme = createMuiTheme(Data.Meta.Theme);
 
 ReactDOM.render(
   <React.StrictMode>

@@ -30,8 +30,34 @@
   color: white;
 }
 
-.add-shadow {
-  box-shadow: 0 0 4px 0 (0, 0, 0, 1);
+.HeaderSpacer {
+  height: 140px;
+}
+
+.AttributesSection {
+  margin-top: -100px;
+  text-align: center;
+}
+
+.Attributes {
+  display: flex;
+  gap: 40px;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.AttributeTile {
+  flex: 1 1 0;
+  background-color: white;
+  border-radius: 15px;
+  height: 600px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  padding: 40px;
+}
+
+.BigIcon {
+  font-size: 80px;
 }
 
 .ContactForm {
@@ -39,8 +65,39 @@
   height: 1000px;
 }
 
+/* Tablet/small window */
+@media only screen and (max-width : 1300px) {
+  .Attributes {
+    gap: 0;
+    width: 700px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+
+  .AttributeTile {
+    border-radius: 0;
+    box-shadow: none;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media only screen and (max-width : 760px) {
+  .Attributes {
+    flex-direction: column;
+    width: initial;
+    margin: 0 30px;
+    box-sizing: border-box;
+  }
+
+  .AttributeTile {
+    border-left: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+@media only screen and (max-width : 600px) {
   .NavTitle, .AnchorButtons {
     display: none;
   }
