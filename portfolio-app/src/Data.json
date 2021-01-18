@@ -56,17 +56,87 @@
         {
             "Name": "Software",
             "Icon": "code",
-            "Content": "I've been honing my development skills for over ten years.\n\n\nMy favorite languages\n\nC#\nPython\nPHP\nVB.NET\nSQL\nJavascript\nJSX\nHTML\nCSS\nX(A)ML\n\n\nTools I use\n\nVisual Studio\nVS Code\nGit(Hub)\nAtom\nToad\nDataGrip\nPyCharm\nPhpStorm"
+            "Description": "I've been honing my development skills for over ten years.",
+            "Sections": [
+                {
+                    "Title": "Back end languages",
+                    "Content": [
+                        "C#",
+                        "Python",
+                        "PHP",
+                        "VB.NET",
+                        "SQL"
+                    ]
+                },
+                {
+                    "Title": "Front end languages",
+                    "Content": [
+                        "Javascript",
+                        "JSX",
+                        "HTML",
+                        "CSS",
+                        "X(A)ML"
+                    ]
+                }
+            ]
         },
         {
             "Name": "Design",
             "Icon": "palette",
-            "Content": ""
+            "Description": "I take pride in my attention to detail and artistic aptitudes.",
+            "Sections": [
+                {
+                    "Title": "My specialties",
+                    "Content": [
+                        "Graphics",
+                        "Video effects",
+                        "Web/UX design",
+                        "Photo editing"
+                    ]
+                },
+                {
+                    "Title": "Favorite tools",
+                    "Content": [
+                        "Photoshop",
+                        "GIMP",
+                        "Illustrator",
+                        "Premiere Pro",
+                        "After Effects",
+                        "InDesign",
+                        "Adobe XD"
+                    ]
+                }
+            ]
         },
         {
             "Name": "Experience",
-            "Icon": "work_outline",
-            "Content": ""
+            "Icon": "work-outline",
+            "Description": "I've been working to improve these skills for most of my life.",
+            "Sections": [
+                {
+                    "Title": "Who I've worked for",
+                    "Content": [
+                        "NASA",
+                        "SWOSU",
+                        "Paycom Software",
+                        "Darlington Schools"
+                    ]
+                },
+                {
+                    "Title": "Freelance contracts",
+                    "Content": [
+                        "Growing Wellness, LLC",
+                        "Kirch's Korner",
+                        "ACTS Community Church",
+                        "Bloom Counseling",
+                        "Quail Springs Baptist Church"
+                    ]
+                }
+            ]
         }
-    ]
+    ],
+    "Portfolio": {
+        "Title": "Project Portfolio",
+        "Description": "These are some projects I've worked on. Some are works in progress."
+    }
 }

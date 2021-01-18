@@ -5,7 +5,6 @@ import Icon from '@material-ui/core/Icon';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import TextTransition from 'react-text-transition';
 import Data from './Data.json';
-import { Attribute } from './components/Attribute';
 
 function App() {
   const [shadowNav, setShadowNav] = useState(false);
@@ -30,7 +29,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <div 
+      <div
         id="top"
         className="Top"
       />
@@ -96,20 +95,49 @@ function App() {
       <div className="AttributesSection">
         <div className="Attributes">
           {Data.Attributes.map(attr =>
-            <Attribute
-              key={attr.Name}
-              icon={
-                <Icon
-                  fontSize="inherit"
-                  color="primary"
-                >
+            <div
+              className="AttributeTile"
+            >
+              <span className="BigIcon">
+                <Icon fontSize="inherit" color="primary">
                   {attr.Icon}
-                </Icon>}
-              title={attr.Name}
-              content={attr.Content}
-            />
+                </Icon>
+                <Material.Typography variant="h5">
+                  {attr.Name}
+                </Material.Typography>
+              </span>
+              <div className="Multiline GrayText">
+                <Material.Typography color="inherit">
+                  {attr.Description}
+                </Material.Typography>
+                <Material.Typography variant="h6" paragraph />
+                {attr.Sections.map(section =>
+                  <React.Fragment>
+                    <Material.Typography variant="h6">
+                      {section.Title}
+                    </Material.Typography>
+                    {section.Content.map(item =>
+                      <Material.Typography>
+                        {item}
+                      </Material.Typography>
+                    )}
+                    <Material.Typography variant="h6" paragraph />
+                  </React.Fragment>
+                )}
+              </div>
+            </div>
           )}
         </div>
+      </div>
+      <div className="PortfolioSection" id="portfolio">
+        <Material.Typography variant="h3" paragraph>
+          {Data.Portfolio.Title}
+        </Material.Typography>
+        <span className="GrayText">
+          <Material.Typography variant="subtitle1" paragraph>
+            {Data.Portfolio.Description}
+          </Material.Typography>
+        </span>
       </div>
     </React.Fragment>
   );

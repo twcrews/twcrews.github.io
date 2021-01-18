@@ -64,7 +64,7 @@
   padding: 40px;
 }
 
-.AttrContent {
+.GrayText {
   color: #666;
 }
 
@@ -77,11 +77,16 @@
   height: 1000px;
 }
 
+.PortfolioSection {
+  text-align: center;
+  padding-top: 100px;
+}
+
 /* Tablet/small window */
 @media only screen and (max-width : 1300px) {
   .Attributes {
     gap: 0;
-    width: 700px;
+    width: 860px;
     border-radius: 15px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -94,7 +99,13 @@
   }
 }
 
-@media only screen and (max-width : 760px) {
+@media only screen and (max-width : 920px) {
+  .Attributes {
+    width: 660px;
+  }
+}
+
+@media only screen and (max-width : 720px) {
   .Attributes {
     flex-direction: column;
     width: initial;
@@ -121,5 +132,14 @@
 
   .Subtitle {
     font-size: 20px !important;
+  }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (max-width : 400px) {
+  .Attributes {
+    box-shadow: none;
+    margin: 0;
+    border-radius: 0;
   }
 }
