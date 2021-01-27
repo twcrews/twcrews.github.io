@@ -9,6 +9,7 @@
 
 .AppBar {
   text-align: center;
+  position: sticky;
 }
 
 .NavLogo {
@@ -72,14 +73,41 @@
   font-size: 80px;
 }
 
-.ContactForm {
-  width: 1000px;
-  height: 1000px;
-}
-
 .PortfolioSection {
   text-align: center;
   padding-top: 100px;
+}
+
+.PortfolioTiles {
+  width: 1200px;
+  margin: 60px auto;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat( auto-fit, minmax(320px, 1fr));
+}
+
+.PortfolioProject {
+  cursor: pointer;
+  border-radius: 15px;
+  overflow: hidden;
+  height: 260px;
+  position: relative;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.PortfolioProject:hover {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+.ProjectTypography {
+  color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  text-align: left;
+  min-height: 70px;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 1.0);
 }
 
 /* Tablet/small window */
@@ -97,10 +125,14 @@
     box-shadow: none;
     border-left: 1px solid rgba(0, 0, 0, 0.1);
   }
+
+  .PortfolioTiles {
+    width: 860px;
+  }
 }
 
 @media only screen and (max-width : 920px) {
-  .Attributes {
+  .Attributes, .PortfolioTiles {
     width: 660px;
   }
 }
@@ -116,6 +148,14 @@
   .AttributeTile {
     border-left: none;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .PortfolioTiles {
+    width: initial;
+    display: flex;
+    flex-direction: column;
+    margin: 60px 30px;
+    box-sizing: border-box;
   }
 }
 

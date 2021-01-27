@@ -34,10 +34,10 @@ function App() {
         className="Top"
       />
       <Material.AppBar
-        position="sticky"
         id="nav"
         elevation={shadowNav ? 3 : 0}
         className="AppBar"
+        position="sticky"
       >
         <Material.Toolbar className="NavBar">
           <span className="NavItems">
@@ -138,6 +138,26 @@ function App() {
             {Data.Portfolio.Description}
           </Material.Typography>
         </span>
+        <div className="PortfolioTiles">
+          {Data.Portfolio.Projects.map(project =>
+            <div
+              className="PortfolioProject"
+              style={{ background: "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(" + project.Image + "), #00b9ff", backgroundSize: "cover" }}
+            >
+              <div className="ProjectTypography">
+                <Material.Typography variant="h6">
+                  {project.Title}
+                </Material.Typography>
+                <Material.Typography 
+                  variant="subtitle2"
+                  style={{opacity: 0.8}}
+                >
+                  {project.Description}
+                </Material.Typography>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </React.Fragment>
   );
