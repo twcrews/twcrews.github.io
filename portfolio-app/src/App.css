@@ -1,0 +1,185 @@
+.Multiline {
+  white-space: pre-wrap;
+}
+
+.Top {
+  position: absolute;
+  top: 0;
+}
+
+.AppBar {
+  text-align: center;
+  position: sticky;
+}
+
+.NavLogo {
+  height: 40px;
+  width: 40px;
+}
+
+.NavBar {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.NavItems {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.AnchorButtons {
+  display: flex;
+  gap: 20px;
+}
+
+.AboutSection {
+  padding: 40px 0;
+  text-align: center;
+  background-color: #00b9ff;
+  color: white;
+}
+
+.HeaderSpacer {
+  height: 140px;
+}
+
+.AttributesSection {
+  margin-top: -100px;
+  text-align: center;
+}
+
+.Attributes {
+  display: flex;
+  gap: 40px;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.AttributeTile {
+  flex: 1 1 0;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  padding: 40px;
+}
+
+.GrayText {
+  color: #666;
+}
+
+.BigIcon {
+  font-size: 80px;
+}
+
+.PortfolioSection {
+  text-align: center;
+  padding-top: 100px;
+}
+
+.PortfolioTiles {
+  width: 1200px;
+  margin: 60px auto;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat( auto-fit, minmax(320px, 1fr));
+}
+
+.PortfolioProject {
+  cursor: pointer;
+  border-radius: 15px;
+  overflow: hidden;
+  height: 260px;
+  position: relative;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.PortfolioProject:hover {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+.ProjectTypography {
+  color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  text-align: left;
+  min-height: 70px;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 1.0);
+}
+
+/* Tablet/small window */
+@media only screen and (max-width : 1300px) {
+  .Attributes {
+    gap: 0;
+    width: 860px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+
+  .AttributeTile {
+    border-radius: 0;
+    box-shadow: none;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .PortfolioTiles {
+    width: 860px;
+  }
+}
+
+@media only screen and (max-width : 920px) {
+  .Attributes, .PortfolioTiles {
+    width: 660px;
+  }
+}
+
+@media only screen and (max-width : 720px) {
+  .Attributes {
+    flex-direction: column;
+    width: initial;
+    margin: 0 30px;
+    box-sizing: border-box;
+  }
+
+  .AttributeTile {
+    border-left: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .PortfolioTiles {
+    width: initial;
+    display: flex;
+    flex-direction: column;
+    margin: 60px 30px;
+    box-sizing: border-box;
+  }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (max-width : 600px) {
+  .NavTitle, .AnchorButtons {
+    display: none;
+  }
+
+  .Header {
+    font-size: 48px !important;
+    font-weight: 400 !important;
+  }
+
+  .Subtitle {
+    font-size: 20px !important;
+  }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (max-width : 400px) {
+  .Attributes {
+    box-shadow: none;
+    margin: 0;
+    border-radius: 0;
+  }
+}

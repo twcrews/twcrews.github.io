@@ -1,0 +1,225 @@
+{
+    "Meta": {
+        "Theme": {
+            "palette": {
+                "primary": {
+                    "light": "#6aebff",
+                    "main": "#00b9ff",
+                    "dark": "#0089cb",
+                    "contrastText": "#fff"
+                },
+                "secondary": {
+                    "main": "#f50057"
+                }
+            }
+        },
+        "Logo": "128_fill.png",
+        "Owner": "Tommy Crews",
+        "Anchors": [
+            {
+                "Name": "About",
+                "Link": "top",
+                "Color": "inherit"
+            },
+            {
+                "Name": "Portfolio",
+                "Link": "portfolio",
+                "Color": "inherit"
+            },
+            {
+                "Name": "Contact",
+                "Link": "contact",
+                "Variant": "contained",
+                "Color": "secondary"
+            }
+        ]
+    },
+    "Header": {
+        "Title": "Hello, world!",
+        "SubtitlePrefix": "I engineer ",
+        "SubtitleItems": [
+            "full stack software.",
+            "desktop applications.",
+            "websites.",
+            "databases.",
+            "software solutions.",
+            "graphics.",
+            "video productions.",
+            "collaborative projects.",
+            "strong teamwork.",
+            "professional products.",
+            "lasting relationships.",
+            "delicious coffee."
+        ]
+    },
+    "Attributes": [
+        {
+            "Name": "Software",
+            "Icon": "code",
+            "Description": "I've been honing my development skills for over ten years.",
+            "Sections": [
+                {
+                    "Title": "Back end languages",
+                    "Content": [
+                        "C#",
+                        "Python",
+                        "PHP",
+                        "VB.NET",
+                        "SQL"
+                    ]
+                },
+                {
+                    "Title": "Front end languages",
+                    "Content": [
+                        "Javascript",
+                        "JSX",
+                        "HTML",
+                        "CSS",
+                        "X(A)ML"
+                    ]
+                }
+            ]
+        },
+        {
+            "Name": "Design",
+            "Icon": "palette",
+            "Description": "I take pride in my attention to detail and artistic aptitudes.",
+            "Sections": [
+                {
+                    "Title": "My specialties",
+                    "Content": [
+                        "Graphics",
+                        "Video effects",
+                        "Web/UX design",
+                        "Photo editing"
+                    ]
+                },
+                {
+                    "Title": "Favorite tools",
+                    "Content": [
+                        "Photoshop",
+                        "GIMP",
+                        "Illustrator",
+                        "Premiere Pro",
+                        "After Effects",
+                        "InDesign",
+                        "Adobe XD"
+                    ]
+                }
+            ]
+        },
+        {
+            "Name": "Experience",
+            "Icon": "work-outline",
+            "Description": "I've been working to improve these skills for most of my life.",
+            "Sections": [
+                {
+                    "Title": "Who I've worked for",
+                    "Content": [
+                        "NASA",
+                        "SWOSU",
+                        "Paycom Software",
+                        "Darlington Schools"
+                    ]
+                },
+                {
+                    "Title": "Freelance contracts",
+                    "Content": [
+                        "Growing Wellness, LLC",
+                        "Kirch's Korner",
+                        "ACTS Community Church",
+                        "Bloom Counseling",
+                        "Quail Springs Baptist Church"
+                    ]
+                }
+            ]
+        }
+    ],
+    "Portfolio": {
+        "Title": "Project Portfolio",
+        "Description": "These are some projects I've worked on. Some are works in progress.",
+        "Projects": [
+            {
+                "Title": "Résumé",
+                "Year": "2021",
+                "Description": "An interactive résumé built with React.",
+                "Image": "projects/resume.png",
+                "Link": "https://www.crews.dev/resume",
+                "Enabled": false,
+                "FullWidth": true
+            },
+            {
+                "Title": "Paycom Data Management",
+                "Year": "2020",
+                "Description": "A web application for safely and effectively executing data fixes.",
+                "Image": "projects/data-management.png",
+                "Link": "https://www.crews.dev/pcm-data-management",
+                "Enabled": false
+            },
+            {
+                "Title": "bCards",
+                "Year": "2020",
+                "Description": "An offline React app alternative to online flash card services.",
+                "Image": "projects/b-cards.png",
+                "Link": "https://www.crews.dev/b-cards",
+                "Enabled": false
+            },
+            {
+                "Title": "MarkIt",
+                "Year": "Coming Soon",
+                "Description": "A multi-platform desktop app for quickly watermarking images.",
+                "Image": "projects/markit.png",
+                "Link": "https://www.crews.dev/markit",
+                "Enabled": false
+            },
+            {
+                "Title": "PDF2IMG",
+                "Year": "2020",
+                "Description": "A Windows app that converts a PDF document to an image or images.",
+                "Image": "projects/pdf2img.png",
+                "Link": "https://www.crews.dev/pdf2img",
+                "Enabled": false
+            },
+            {
+                "Title": "TgaSharp",
+                "Year": "2020",
+                "Description": "A port of TgaSharpLib to .NET Core.",
+                "Image": "projects/tgasharp.png",
+                "Link": "https://www.crews.dev/tgasharp",
+                "Enabled": false
+            },
+            {
+                "Title": "Sight Word Cards",
+                "Year": "2020",
+                "Description": "A Windows app for editing and presenting short strings on cards.",
+                "Image": "projects/sight-word-cards.png",
+                "Link": "https://www.crews.dev/sight-word-cards",
+                "Enabled": false
+            },
+            {
+                "Title": "MAESTRO (NASA)",
+                "Year": "2017",
+                "Description": "An automated lab management tool that configures and controls rocket simulations.",
+                "Image": "projects/maestro.png",
+                "Link": "https://www.crews.dev/maestro",
+                "Enabled": false
+            },
+            {
+                "Title": "MAESTRO (NASA)",
+                "Year": "2017",
+                "Description": "An automated lab management tool that configures and controls rocket simulations.",
+                "Image": "projects/maestro.png",
+                "Link": "https://www.crews.dev/maestro",
+                "Enabled": false
+            },
+            {
+                "Title": "MAPSS (NASA)",
+                "Year": "2016",
+                "Description": "",
+                "Image": "projects/mapss.png",
+                "Link": "https://www.crews.dev/mapss",
+                "Enabled": false
+            }
+        ]
+    }
+}
