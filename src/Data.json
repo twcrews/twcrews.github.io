@@ -35,6 +35,7 @@
         ]
     },
     "Header": {
+        "Hero": "hero.png",
         "Title": "Hello, world!",
         "SubtitlePrefix": "I engineer ",
         "SubtitleItems": [
@@ -205,12 +206,12 @@
                 "Enabled": false
             },
             {
-                "Title": "MAESTRO (NASA)",
+                "Title": "Kirch's Korner",
                 "Year": "2017",
-                "Description": "An automated lab management tool that configures and controls rocket simulations.",
-                "Image": "projects/maestro.png",
-                "Link": "https://www.crews.dev/maestro",
-                "Enabled": false
+                "Description": "A modified WordPress site for Kirch's Korner Used Furniture.",
+                "Image": "projects/kirchs-korner.png",
+                "Link": "http://kirchskorner.com",
+                "Enabled": true
             },
             {
                 "Title": "MAPSS (NASA)",
@@ -219,6 +220,48 @@
                 "Image": "projects/mapss.png",
                 "Link": "https://www.crews.dev/mapss",
                 "Enabled": false
+            }
+        ]
+    },
+    "Contact": {
+        "Title": "Let's Get in Touch",
+        "Description": "Send me a message and I'll get back to you ASAP.",
+        "Fields": [
+            {
+                "Title": "Name",
+                "Component": "TextField",
+                "Type": "text",
+                "Required": true,
+                "Width": "half"
+            },
+            {
+                "Title": "Email",
+                "Component": "TextField",
+                "Type": "email",
+                "Required": true,
+                "Width": "half"
+            },
+            {
+                "Title": "Contact Reason",
+                "Component": "Select",
+                "Required": false,
+                "Width": "half",
+                "Items": [
+                    "General Inquiry",
+                    "Project Proposal",
+                    "Collaboration",
+                    "Feedback",
+                    "Other"
+                ]
+            },
+            {
+                "Title": "Message",
+                "Component": "TextField",
+                "Type": "text",
+                "Multiline": true,
+                "Required": true,
+                "Width": "full",
+                "LineHeight": 10
             }
         ]
     }

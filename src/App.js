@@ -10,6 +10,8 @@ function App() {
   const [shadowNav, setShadowNav] = useState(false);
   const [currentThing, setCurrentThing] = useState(0);
 
+  const handleLink = (url) => { window.open(url, "_blank") }
+
   useScrollPosition(({ _prevPos, currPos }) => {
     const isScrolled = currPos.y < 0;
     if (isScrolled !== shadowNav) setShadowNav(isScrolled);
@@ -54,25 +56,30 @@ function App() {
             </Material.Typography>
           </span>
           <span className="NavItems">
-            <span className="AnchorButtons">
-              {Data.Meta.Anchors.map(anchor =>
-                <Material.Button
-                  key={anchor.Name}
-                  variant={anchor.Variant}
-                  color={anchor.Color}
-                  onClick={() => document.getElementById(anchor.Link)
-                    .scrollIntoView()}
-                >
-                  {anchor.Name}
-                </Material.Button>
-              )}
-            </span>
+            {Data.Meta.Anchors.map(anchor =>
+              <Material.Button
+                key={anchor.Name}
+                id={anchor.Name}
+                className="AnchorButton"
+                variant={anchor.Variant}
+                color={anchor.Color}
+                onClick={() => document
+                  .getElementById(anchor.Link)
+                  .scrollIntoView()}
+              >
+                {anchor.Name}
+              </Material.Button>
+            )}
           </span>
         </Material.Toolbar>
       </Material.AppBar>
       <div
         className="AboutSection"
       >
+        <div
+          className="Hero"
+          style={{ backgroundImage: "url(" + Data.Header.Hero + ")" }}
+        />
         <Material.Typography
           variant="h1"
           paragraph
@@ -96,6 +103,7 @@ function App() {
         <div className="Attributes">
           {Data.Attributes.map(attr =>
             <div
+              key={attr.Name}
               className="AttributeTile"
             >
               <span className="BigIcon">
@@ -112,12 +120,12 @@ function App() {
                 </Material.Typography>
                 <Material.Typography variant="h6" paragraph />
                 {attr.Sections.map(section =>
-                  <React.Fragment>
+                  <React.Fragment key={section.Title}>
                     <Material.Typography variant="h6">
                       {section.Title}
                     </Material.Typography>
                     {section.Content.map(item =>
-                      <Material.Typography>
+                      <Material.Typography key={item}>
                         {item}
                       </Material.Typography>
                     )}
@@ -141,19 +149,38 @@ function App() {
         <div className="PortfolioTiles">
           {Data.Portfolio.Projects.map(project =>
             <div
+              key={project.Title}
               className="PortfolioProject"
-              style={{ background: "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(" + project.Image + "), #00b9ff", backgroundSize: "cover" }}
+              style={{
+                backgroundImage: "url(" + project.Image + ")",
+                backgroundColor: "#00b9ff",
+                backgroundSize: "cover",
+                backgroundPosition: "center"
+              }}
             >
-              <div className="ProjectTypography">
-                <Material.Typography variant="h6">
-                  {project.Title}
-                </Material.Typography>
-                <Material.Typography 
-                  variant="subtitle2"
-                  style={{opacity: 0.8}}
-                >
-                  {project.Description}
-                </Material.Typography>
+              <div
+                className="Darken FullHeight"
+                onClick={() => project.Enabled ?
+                  handleLink(project.Link) :
+                  null}
+              >
+                <div className="ProjectTypography">
+                  <Material.Typography variant="h6">
+                    {project.Title}
+                  </Material.Typography>
+                  <Material.Typography
+                    variant="caption"
+                    style={{ textTransform: "uppercase" }}
+                  >
+                    {project.Year}
+                  </Material.Typography>
+                  <Material.Typography
+                    variant="subtitle2"
+                    style={{ opacity: 0.8 }}
+                  >
+                    {project.Description}
+                  </Material.Typography>
+                </div>
               </div>
             </div>
           )}
