@@ -226,26 +226,30 @@
     "Contact": {
         "Title": "Let's Get in Touch",
         "Description": "Send me a message and I'll get back to you ASAP.",
+        "Button": "Send",
+        "API": "",
         "Fields": [
             {
-                "Title": "Name",
+                "ID": "name",
+                "Label": "Name",
                 "Component": "TextField",
                 "Type": "text",
                 "Required": true,
-                "Width": "half"
+                "Width": 1
             },
             {
-                "Title": "Email",
+                "ID": "email",
+                "Label": "Email",
                 "Component": "TextField",
                 "Type": "email",
                 "Required": true,
-                "Width": "half"
+                "Width": 1
             },
             {
-                "Title": "Contact Reason",
+                "ID": "reason",
+                "Label": "Contact Reason",
                 "Component": "Select",
-                "Required": false,
-                "Width": "half",
+                "Width": 1,
                 "Items": [
                     "General Inquiry",
                     "Project Proposal",
@@ -255,12 +259,13 @@
                 ]
             },
             {
-                "Title": "Message",
+                "ID": "message",
+                "Label": "Message",
                 "Component": "TextField",
                 "Type": "text",
                 "Multiline": true,
                 "Required": true,
-                "Width": "full",
+                "Width": 2,
                 "LineHeight": 10
             }
         ]

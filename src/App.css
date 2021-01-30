@@ -97,14 +97,14 @@
   font-size: 80px;
 }
 
-.PortfolioSection {
+.SectionHeader {
   text-align: center;
   padding-top: 100px;
 }
 
 .PortfolioTiles {
   width: 1200px;
-  margin: 60px auto;
+  margin: 60px auto 0;
   display: grid;
   gap: 40px;
   grid-template-columns: repeat( auto-fit, minmax(320px, 1fr));
@@ -124,6 +124,15 @@
   bottom: 0;
   left: 0;
   padding: 20px;
+  text-align: left;
+}
+
+.ContactFields {
+  width: 1200px;
+  margin: 100px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
   text-align: left;
 }
 

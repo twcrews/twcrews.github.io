@@ -9,8 +9,14 @@ import Data from './Data.json';
 function App() {
   const [shadowNav, setShadowNav] = useState(false);
   const [currentThing, setCurrentThing] = useState(0);
+  const [formData, setFormData] = useState({});
 
-  const handleLink = (url) => { window.open(url, "_blank") }
+  const handleLink = (url) => { window.open(url, "_blank") };
+  const handleFieldChange = (event) => {
+    var tmpForm = {...formData};
+    tmpForm[event.target.id] = event.target.value;
+    setFormData(tmpForm);
+  };
 
   useScrollPosition(({ _prevPos, currPos }) => {
     const isScrolled = currPos.y < 0;
@@ -137,7 +143,7 @@ function App() {
           )}
         </div>
       </div>
-      <div className="PortfolioSection" id="portfolio">
+      <div className="SectionHeader" id="portfolio">
         <Material.Typography variant="h3" paragraph>
           {Data.Portfolio.Title}
         </Material.Typography>
@@ -182,6 +188,61 @@ function App() {
                   </Material.Typography>
                 </div>
               </div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="SectionHeader" id="contact">
+        <Material.Typography variant="h3" paragraph>
+          {Data.Contact.Title}
+        </Material.Typography>
+        <span className="GrayText">
+          <Material.Typography variant="subtitle1">
+            {Data.Contact.Description}
+          </Material.Typography>
+        </span>
+        <div className="ContactFields">
+          {Data.Contact.Fields.map(field => 
+            <div key={field.ID}>
+              {
+                field.Component === "TextField" ?
+                  <Material.TextField
+                    id={field.ID}
+                    type={field.Type}
+                    label={field.Label}
+                    required={field.Required}
+                    style={{gridColumnEnd: "span " + field.Width}}
+                    onChange={handleFieldChange}
+                    value={formData[field.ID]}
+                    multiline={field.Multiline}
+                    rowsMax={field.LineHeight}
+                    fullWidth
+                    variant="outlined"
+                  /> :
+                  field.Component === "Select" ?
+                  <Material.FormControl variant="filled" fullWidth>
+                    <Material.InputLabel 
+                      id={field.ID + "-label"}
+                    >
+                      {field.Label}
+                    </Material.InputLabel>
+                    <Material.Select
+                    labelId={field.ID + "-label"}
+                      value={formData[field.ID] ?? ""}
+                      onChange={handleFieldChange}
+                      style={{gridColumnEnd: "span " + field.Width}}
+                    >
+                      {field.Items.map(item =>
+                        <Material.MenuItem
+                          key={item}
+                          value={item}
+                        >
+                          {item}
+                        </Material.MenuItem>
+                      )}
+                    </Material.Select>
+                  </Material.FormControl> : null
+              }
             </div>
           )}
         </div>
