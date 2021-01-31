@@ -7,10 +7,26 @@ import TextTransition from 'react-text-transition';
 import Data from './Data.json';
 
 function App() {
+
+  /* 
+  ====================
+    STATE
+  ====================
+  */
+
   const [shadowNav, setShadowNav] = useState(false);
   const [currentThing, setCurrentThing] = useState(0);
   const [formData, setFormData] = useState({});
   const [formErrors, setFormErrors] = useState(false);
+  const [dialog, setDialog] = useState(false);
+  const [dialogTitle, setDialogTitle] = useState(null);
+  const [dialogMessage, setDialogMessage] = useState(null);
+
+  /* 
+  ====================
+    FUNCTIONS
+  ====================
+  */
 
   const fieldValid = (field) => {
     var val = formData[field.ID];
@@ -18,8 +34,7 @@ function App() {
     if (val) {
       return val.trim().length > 0 && pattern.test(val.trim());
     }
-  }
-
+  };
   const formValid = () => {
     var BreakException = {};
     try {
@@ -34,10 +49,37 @@ function App() {
     }
     return true;
   };
-
   const submitForm = () => {
-
+    var formUrl = Data.Meta.FormUrl;
+    var formEntries = Data.Contact.Fields.map(field => field.Entry);
+    var formValues = Data.Contact.Fields.map(field => formData[field.ID]);
+    var submitData = new FormData();
+    formEntries.forEach((entry, i) => submitData.append(entry, formValues[i]));
+    fetch(formUrl, {
+      method: "POST",
+      mode: "no-cors",
+      referrer: "strict-origin-when-cross-origin",
+      body: submitData
+    })
+      .then(() => {
+        var dialog = Data.Dialog.SubmitSuccess;
+        setDialogTitle(dialog.Title);
+        setDialogMessage(dialog.Message);
+        setDialog(true);
+      })
+      .catch(e => {
+        var dialog = Data.Dialog.SubmitFail;
+        setDialogTitle(dialog.Title);
+        setDialogMessage(dialog.Message);
+        setDialog(true);
+      });
   }
+
+  /* 
+  ====================
+    EVENT HANDLERS
+  ====================
+  */
 
   const handleLink = (url) => { window.open(url, "_blank"); };
   const handleFieldChange = (event) => {
@@ -52,6 +94,13 @@ function App() {
       submitForm();
     }
   };
+  const handleDialogClose = () => { setDialog(false); };
+
+  /* 
+  ====================
+    HOOKS
+  ====================
+  */
 
   useScrollPosition(({ _prevPos, currPos }) => {
     const isScrolled = currPos.y < 0;
@@ -67,12 +116,39 @@ function App() {
       }
     }, 2000);
     return (() => clearInterval(interval));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   });
+
+  /* 
+  ====================
+    RENDER
+  ====================
+  */
 
   return (
     <div className="Page">
+
+      {/* Reusable dialog */}
+      <Material.Dialog
+        open={dialog}
+        onClose={handleDialogClose}
+      >
+        <Material.DialogTitle>
+          {dialogTitle}
+        </Material.DialogTitle>
+        <Material.DialogContent>
+          <Material.DialogContentText>
+            {dialogMessage}
+          </Material.DialogContentText>
+        </Material.DialogContent>
+        <Material.DialogActions>
+          <Material.Button onClick={handleDialogClose}>
+            Dismiss
+          </Material.Button>
+        </Material.DialogActions>
+      </Material.Dialog>
       <div className="BodyWrap">
+
+        {/* Navigation bar */}
         <div
           id="top"
           className="Top"
@@ -115,6 +191,8 @@ function App() {
             </span>
           </Material.Toolbar>
         </Material.AppBar>
+
+        {/* Header/hero */}
         <div
           className="AboutSection"
         >
@@ -141,6 +219,8 @@ function App() {
           </Material.Typography>
           <div className="HeaderSpacer" />
         </div>
+
+        {/* Attributes */}
         <div className="AttributesSection Content">
           <div className="Attributes">
             {Data.Attributes.map(attr =>
@@ -179,6 +259,8 @@ function App() {
             )}
           </div>
         </div>
+
+        {/* Project portfolio */}
         <div className="Content" id="portfolio">
           <Material.Typography
             variant="h3"
@@ -232,6 +314,8 @@ function App() {
             )}
           </div>
         </div>
+
+        {/* Contact form */}
         <div className="Content" id="contact">
           <Material.Typography
             variant="h3"
@@ -253,6 +337,7 @@ function App() {
                   gridColumnStart: field.GridColumnStart,
                   gridColumnEnd: "span " + field.GridColumnSpan
                 }}
+                className="ContactField"
               >
                 {
                   field.Component === "TextField" ?
@@ -309,22 +394,33 @@ function App() {
               </div>
             )}
           </div>
-          <Material.Button
-            variant="contained"
-            color="secondary"
-            size="large"
-            onClick={handleSendClick}
-          >
-            {Data.Contact.Button}
-          </Material.Button>
+          <div className="SendButton">
+            <Material.Button
+              fullWidth
+              variant="contained"
+              color="secondary"
+              size="large"
+              onClick={handleSendClick}
+            >
+              {Data.Contact.Button}
+            </Material.Button>
+          </div>
         </div>
       </div>
+      
       <footer className="Footer">
         <div className="Content GrayText">
-          <Material.Typography paragraph>
+          <Material.Typography>
             {Data.Footer.Copyright.replace("{year}", new Date().getFullYear())}
           </Material.Typography>
-          <Material.Button 
+          <Material.Typography variant="caption" paragraph>
+            {Data.Footer.Subtext}
+          </Material.Typography>
+          <Material.Button
+            variant="contained"
+            color="primary"
+            size="small"
+            disableElevation
             onClick={() => handleLink(Data.Footer.PromotionLink)}
           >
             {Data.Footer.PromotionText}
