@@ -26,6 +26,12 @@
   height: 100%;
 }
 
+.Content {
+  width: 1200px;
+  text-align: center;
+  margin: 0 auto;
+}
+
 .AppBar {
   text-align: center;
   position: sticky;
@@ -70,14 +76,11 @@
 
 .AttributesSection {
   margin-top: -100px;
-  text-align: center;
 }
 
 .Attributes {
   display: flex;
   gap: 40px;
-  width: 1200px;
-  margin: 0 auto;
 }
 
 .AttributeTile {
@@ -98,12 +101,10 @@
 }
 
 .SectionHeader {
-  text-align: center;
   padding-top: 100px;
 }
 
 .PortfolioTiles {
-  width: 1200px;
   margin: 60px auto 0;
   display: grid;
   gap: 40px;
@@ -128,19 +129,22 @@
 }
 
 .ContactFields {
-  width: 1200px;
-  margin: 100px auto;
+  margin: 40px auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 40px;
   text-align: left;
+  width: 50%;
 }
 
 /* Tablet/small window */
 @media only screen and (max-width : 1300px) {
+  .Content {
+    width: 860px;
+  }
+
   .Attributes {
     gap: 0;
-    width: 860px;
     border-radius: 15px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -152,8 +156,8 @@
     border-left: 1px solid rgba(0, 0, 0, 0.1);
   }
 
-  .PortfolioTiles {
-    width: 860px;
+  .ContactFields {
+    width: 80%;
   }
 }
 
@@ -168,19 +172,44 @@
     padding: 10px 0;
   }
   
-  .Attributes, .PortfolioTiles {
+  .Content {
     width: 660px;
   }
 
+  .ProjectTypography {
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    padding: 5px 10px;
+  }
+
   .Darken {
+    background: none;
     opacity: 1;
+  }
+
+  .ContactFields {
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    text-align: left;
+    padding: 0 10px;
+  }
+
+  .ContactFields {
+    width: 100%;
+    box-sizing: border-box;
+    grid-gap: 20px;
   }
 }
 
 @media only screen and (max-width : 720px) {
+  .Content {
+    width: initial;
+  }
+
   .Attributes {
     flex-direction: column;
-    width: initial;
     margin: 0 30px;
     box-sizing: border-box;
   }
@@ -191,7 +220,6 @@
   }
 
   .PortfolioTiles {
-    width: initial;
     display: flex;
     flex-direction: column;
     margin: 60px 30px;
@@ -217,13 +245,17 @@
   .Subtitle {
     font-size: 20px !important;
   }
-}
 
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (max-width : 400px) {
   .Attributes, .PortfolioTiles, .PortfolioProject {
     box-shadow: none;
     margin: 0;
     border-radius: 0;
+    gap: 0;
+    grid-gap: 0;
   }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (max-width : 400px) {
+
 }

@@ -185,7 +185,7 @@
                 "Title": "TgaSharp",
                 "Year": "2020",
                 "Description": "A port of TgaSharpLib to .NET Core.",
-                "Image": "projects/tgasharp.png",
+                "Image": "projects/tga-sharp.png",
                 "Link": "https://www.crews.dev/tgasharp",
                 "Enabled": false
             },
@@ -226,7 +226,7 @@
     "Contact": {
         "Title": "Let's Get in Touch",
         "Description": "Send me a message and I'll get back to you ASAP.",
-        "Button": "Send",
+        "Button": "Send Message",
         "API": "",
         "Fields": [
             {
@@ -235,7 +235,8 @@
                 "Component": "TextField",
                 "Type": "text",
                 "Required": true,
-                "Width": 1
+                "GridColumnSpan": 2,
+                "HelperText": "Enter your name"
             },
             {
                 "ID": "email",
@@ -243,13 +244,17 @@
                 "Component": "TextField",
                 "Type": "email",
                 "Required": true,
-                "Width": 1
+                "GridColumnSpan": 2,
+                "HelperText": "Enter your email"
             },
             {
                 "ID": "reason",
                 "Label": "Contact Reason",
                 "Component": "Select",
-                "Width": 1,
+                "GridColumnStart": 2,
+                "GridColumnSpan": 2,
+                "Required": true,
+                "HelperText": "Select a contact reason",
                 "Items": [
                     "General Inquiry",
                     "Project Proposal",
@@ -265,8 +270,9 @@
                 "Type": "text",
                 "Multiline": true,
                 "Required": true,
-                "Width": 2,
-                "LineHeight": 10
+                "GridColumnSpan": 4,
+                "Rows": 10,
+                "HelperText": "Enter a message"
             }
         ]
     }

@@ -10,13 +10,35 @@ function App() {
   const [shadowNav, setShadowNav] = useState(false);
   const [currentThing, setCurrentThing] = useState(0);
   const [formData, setFormData] = useState({});
+  const [formErrors, setFormErrors] = useState(false);
+
+  const formValid = () => {
+    var valid = true;
+    Data.Contact.Fields.forEach(field => {
+      if (!formData[field.ID]) {
+        valid = false;
+      }
+    });
+    return valid;
+  };
+
+  const submitForm = () => {
+
+  }
 
   const handleLink = (url) => { window.open(url, "_blank") };
   const handleFieldChange = (event) => {
     var tmpForm = {...formData};
-    tmpForm[event.target.id] = event.target.value;
+    tmpForm[event.target.id ?? event.target.name] = event.target.value;
     setFormData(tmpForm);
   };
+  const handleSendClick = () => {
+    if (!formValid()) {
+      setFormErrors(true);
+    } else {
+      submitForm();
+    }
+  }
 
   useScrollPosition(({ _prevPos, currPos }) => {
     const isScrolled = currPos.y < 0;
@@ -105,7 +127,7 @@ function App() {
         </Material.Typography>
         <div className="HeaderSpacer" />
       </div>
-      <div className="AttributesSection">
+      <div className="AttributesSection Content">
         <div className="Attributes">
           {Data.Attributes.map(attr =>
             <div
@@ -143,8 +165,12 @@ function App() {
           )}
         </div>
       </div>
-      <div className="SectionHeader" id="portfolio">
-        <Material.Typography variant="h3" paragraph>
+      <div className="Content" id="portfolio">
+        <Material.Typography 
+          variant="h3" 
+          paragraph
+          className="SectionHeader"
+        >
           {Data.Portfolio.Title}
         </Material.Typography>
         <span className="GrayText">
@@ -192,8 +218,12 @@ function App() {
           )}
         </div>
       </div>
-      <div className="SectionHeader" id="contact">
-        <Material.Typography variant="h3" paragraph>
+      <div className="Content" id="contact">
+        <Material.Typography
+          variant="h3" 
+          paragraph
+          className="SectionHeader"
+        >
           {Data.Contact.Title}
         </Material.Typography>
         <span className="GrayText">
@@ -203,7 +233,13 @@ function App() {
         </span>
         <div className="ContactFields">
           {Data.Contact.Fields.map(field => 
-            <div key={field.ID}>
+            <div 
+              key={field.ID}
+              style={{
+                gridColumnStart: field.GridColumnStart,
+                gridColumnEnd: "span " + field.GridColumnSpan
+              }}
+            >
               {
                 field.Component === "TextField" ?
                   <Material.TextField
@@ -211,26 +247,35 @@ function App() {
                     type={field.Type}
                     label={field.Label}
                     required={field.Required}
-                    style={{gridColumnEnd: "span " + field.Width}}
                     onChange={handleFieldChange}
-                    value={formData[field.ID]}
+                    value={formData[field.ID] ?? ""}
                     multiline={field.Multiline}
-                    rowsMax={field.LineHeight}
+                    rows={field.Rows}
+                    error={!formData[field.ID] && formErrors}
+                    helperText = {formErrors && !formData[field.ID] ?
+                       field.HelperText : null}
                     fullWidth
                     variant="outlined"
                   /> :
                   field.Component === "Select" ?
-                  <Material.FormControl variant="filled" fullWidth>
+                  <Material.FormControl 
+                    id={field.ID}
+                    variant="filled" 
+                    fullWidth
+                    required={field.Required}
+                    error={!formData[field.ID] && formErrors}
+                  >
                     <Material.InputLabel 
                       id={field.ID + "-label"}
                     >
                       {field.Label}
                     </Material.InputLabel>
                     <Material.Select
-                    labelId={field.ID + "-label"}
+                      id={field.ID}
+                      name={field.ID}
+                      labelId={field.ID + "-label"}
                       value={formData[field.ID] ?? ""}
                       onChange={handleFieldChange}
-                      style={{gridColumnEnd: "span " + field.Width}}
                     >
                       {field.Items.map(item =>
                         <Material.MenuItem
@@ -241,11 +286,23 @@ function App() {
                         </Material.MenuItem>
                       )}
                     </Material.Select>
+                    <Material.FormHelperText>
+                      {formErrors && !formData[field.ID] ?
+                       field.HelperText : null}
+                    </Material.FormHelperText>
                   </Material.FormControl> : null
               }
             </div>
           )}
         </div>
+        <Material.Button
+          variant="contained"
+          color="secondary"
+          size="large"
+          onClick={handleSendClick}
+        >
+          {Data.Contact.Button}
+        </Material.Button>
       </div>
     </React.Fragment>
   );
