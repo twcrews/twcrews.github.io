@@ -35,6 +35,7 @@
         ]
     },
     "Header": {
+        "Hero": "hero.png",
         "Title": "Hello, world!",
         "SubtitlePrefix": "I engineer ",
         "SubtitleItems": [
@@ -184,7 +185,7 @@
                 "Title": "TgaSharp",
                 "Year": "2020",
                 "Description": "A port of TgaSharpLib to .NET Core.",
-                "Image": "projects/tgasharp.png",
+                "Image": "projects/tga-sharp.png",
                 "Link": "https://www.crews.dev/tgasharp",
                 "Enabled": false
             },
@@ -205,12 +206,12 @@
                 "Enabled": false
             },
             {
-                "Title": "MAESTRO (NASA)",
+                "Title": "Kirch's Korner",
                 "Year": "2017",
-                "Description": "An automated lab management tool that configures and controls rocket simulations.",
-                "Image": "projects/maestro.png",
-                "Link": "https://www.crews.dev/maestro",
-                "Enabled": false
+                "Description": "A modified WordPress site for Kirch's Korner Used Furniture.",
+                "Image": "projects/kirchs-korner.png",
+                "Link": "http://kirchskorner.com",
+                "Enabled": true
             },
             {
                 "Title": "MAPSS (NASA)",
@@ -219,6 +220,59 @@
                 "Image": "projects/mapss.png",
                 "Link": "https://www.crews.dev/mapss",
                 "Enabled": false
+            }
+        ]
+    },
+    "Contact": {
+        "Title": "Let's Get in Touch",
+        "Description": "Send me a message and I'll get back to you ASAP.",
+        "Button": "Send Message",
+        "API": "",
+        "Fields": [
+            {
+                "ID": "name",
+                "Label": "Name",
+                "Component": "TextField",
+                "Type": "text",
+                "Required": true,
+                "GridColumnSpan": 2,
+                "HelperText": "Enter your name"
+            },
+            {
+                "ID": "email",
+                "Label": "Email",
+                "Component": "TextField",
+                "Type": "email",
+                "Required": true,
+                "GridColumnSpan": 2,
+                "HelperText": "Enter your email"
+            },
+            {
+                "ID": "reason",
+                "Label": "Contact Reason",
+                "Component": "Select",
+                "GridColumnStart": 2,
+                "GridColumnSpan": 2,
+                "Required": true,
+                "HelperText": "Select a contact reason",
+                "Items": [
+                    "General Inquiry",
+                    "Project Proposal",
+                    "Collaboration",
+                    "Feedback",
+                    "Other"
+                ]
+            },
+            {
+                "ID": "message",
+                "Label": "Message",
+                "Component": "TextField",
+                "Type": "text",
+                "Multiline": true,
+                "Required": true,
+                "GridColumnSpan": 4,
+                "Rows": 10,
+                "HelperText": "Enter a message"
             }
         ]
     }
