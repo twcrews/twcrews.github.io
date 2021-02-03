@@ -126,26 +126,6 @@ function App() {
 
   return (
     <div className="Page">
-
-      {/* Reusable dialog */}
-      <Material.Dialog
-        open={dialog}
-        onClose={handleDialogClose}
-      >
-        <Material.DialogTitle>
-          {dialogTitle}
-        </Material.DialogTitle>
-        <Material.DialogContent>
-          <Material.DialogContentText>
-            {dialogMessage}
-          </Material.DialogContentText>
-        </Material.DialogContent>
-        <Material.DialogActions>
-          <Material.Button onClick={handleDialogClose}>
-            Dismiss
-          </Material.Button>
-        </Material.DialogActions>
-      </Material.Dialog>
       <div className="BodyWrap">
 
         {/* Navigation bar */}
@@ -259,6 +239,7 @@ function App() {
             )}
           </div>
         </div>
+        <div className="SectionSpacer"/>
 
         {/* Project portfolio */}
         <div className="Content" id="portfolio">
@@ -314,6 +295,7 @@ function App() {
             )}
           </div>
         </div>
+        <div className="SectionSpacer"/>
 
         {/* Contact form */}
         <div className="Content" id="contact">
@@ -330,6 +312,26 @@ function App() {
             </Material.Typography>
           </span>
           <div className="ContactFields">
+
+            {/* Reusable dialog */}
+            <Material.Dialog
+              open={dialog}
+              onClose={handleDialogClose}
+            >              
+              <Material.DialogTitle>
+                {dialogTitle}
+              </Material.DialogTitle>
+              <Material.DialogContent>
+                <Material.DialogContentText>
+                  {dialogMessage}
+                </Material.DialogContentText>
+              </Material.DialogContent>
+              <Material.DialogActions>
+                <Material.Button onClick={handleDialogClose}>
+                  Dismiss
+                </Material.Button>
+              </Material.DialogActions>
+            </Material.Dialog>
             {Data.Contact.Fields.map(field =>
               <div
                 key={field.ID}

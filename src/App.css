@@ -80,6 +80,14 @@
   background-position: center;
 }
 
+.SectionSpacer {
+  height: 30px;
+}
+
+.SectionHeader {
+  padding-top: 70px;
+}
+
 .HeaderSpacer {
   height: 140px;
 }
@@ -109,10 +117,6 @@
 
 .BigIcon {
   font-size: 80px;
-}
-
-.SectionHeader {
-  padding-top: 100px;
 }
 
 .PortfolioTiles {
@@ -236,6 +240,10 @@
     width: initial;
   }
 
+  .SectionHeader {
+    padding-top: 0;
+  }
+
   .Attributes, .PortfolioTiles {
     flex-direction: column;
     box-sizing: border-box;
@@ -246,6 +254,7 @@
     margin: 0;
     grid-gap: 0;
     border-radius: 0;
+    padding-bottom: 0;
   }
 
   .AttributeTile {
@@ -277,6 +286,10 @@
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (max-width : 600px) {
+.Page {
+  overflow-x: hidden;
+}
+
   .NavTitle, .AnchorButton {
     display: none !important;
   }
@@ -302,9 +315,4 @@
     border-radius: 0;
     margin: 60px 0 0;
   }
-}
-
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (max-width : 400px) {
-
 }
