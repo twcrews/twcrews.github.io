@@ -257,6 +257,7 @@ function App() {
           </span>
           <div className="PortfolioTiles">
             {Data.Portfolio.Projects.map(project =>
+              project.Enabled ?
               <div
                 key={project.Title}
                 className="PortfolioProject"
@@ -291,7 +292,7 @@ function App() {
                     </Material.Typography>
                   </div>
                 </div>
-              </div>
+              </div> : null
             )}
           </div>
         </div>
