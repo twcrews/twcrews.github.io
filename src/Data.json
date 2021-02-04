@@ -17,18 +17,21 @@
         "Owner": "Crews Development",
         "Anchors": [
             {
+                "ID": "about-button",
                 "Name": "About",
                 "Link": "top",
                 "Color": "inherit"
             },
             {
+                "ID": "portfolio-button",
                 "Name": "Portfolio",
-                "Link": "portfolio",
+                "Link": "portfolio-section",
                 "Color": "inherit"
             },
             {
+                "ID": "contact-button",
                 "Name": "Contact",
-                "Link": "contact",
+                "Link": "contact-section",
                 "Variant": "contained",
                 "Color": "secondary"
             }
@@ -293,11 +296,11 @@
     },
     "Dialog": {
         "SubmitSuccess": {
-            "Title": "Message Sent",
+            "Title": "Message sent",
             "Message": "Thanks! I'll get back to you as soon as possible."
         },
         "SubmitFail": {
-            "Title": "Error",
+            "Title": "Something went wrong",
             "Message": "There was a problem sending your message. Try again later."
         }
     }

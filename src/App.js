@@ -10,6 +10,19 @@ function App() {
 
   /* 
   ====================
+    ENUMS
+  ====================
+  */
+
+  const MessageState = Object.freeze({
+    "Initial": 0,
+    "Sending": 1,
+    "Sent": 2,
+    "Error": 3
+  });
+
+  /* 
+  ====================
     STATE
   ====================
   */
@@ -17,10 +30,8 @@ function App() {
   const [shadowNav, setShadowNav] = useState(false);
   const [currentThing, setCurrentThing] = useState(0);
   const [formData, setFormData] = useState({});
-  const [formErrors, setFormErrors] = useState(false);
-  const [dialog, setDialog] = useState(false);
-  const [dialogTitle, setDialogTitle] = useState(null);
-  const [dialogMessage, setDialogMessage] = useState(null);
+  const [formError, setFormError] = useState(false);
+  const [message, setMessage] = useState(MessageState.Initial);
 
   /* 
   ====================
@@ -50,6 +61,7 @@ function App() {
     return true;
   };
   const submitForm = () => {
+    setMessage(MessageState.Sending);
     var formUrl = Data.Meta.FormUrl;
     var formEntries = Data.Contact.Fields.map(field => field.Entry);
     var formValues = Data.Contact.Fields.map(field => formData[field.ID]);
@@ -61,17 +73,15 @@ function App() {
       referrer: "strict-origin-when-cross-origin",
       body: submitData
     })
-      .then(() => {
-        var dialog = Data.Dialog.SubmitSuccess;
-        setDialogTitle(dialog.Title);
-        setDialogMessage(dialog.Message);
-        setDialog(true);
+      .then(response => {
+        if (response.ok || response.status === 0) {
+          setMessage(MessageState.Sent);
+        } else {
+          setMessage(MessageState.Error);
+        }
       })
-      .catch(e => {
-        var dialog = Data.Dialog.SubmitFail;
-        setDialogTitle(dialog.Title);
-        setDialogMessage(dialog.Message);
-        setDialog(true);
+      .catch(() => {
+        setMessage(MessageState.Error);
       });
   }
 
@@ -89,12 +99,11 @@ function App() {
   };
   const handleSendClick = () => {
     if (!formValid()) {
-      setFormErrors(true);
+      setFormError(true);
     } else {
       submitForm();
     }
   };
-  const handleDialogClose = () => { setDialog(false); };
 
   /* 
   ====================
@@ -118,6 +127,128 @@ function App() {
     return (() => clearInterval(interval));
   });
 
+  /*
+  ====================
+    UI SEGMENTS
+  ====================
+  */
+
+  const contactForm = (
+    <React.Fragment>
+      <div className="ContactForm">
+        {Data.Contact.Fields.map(field =>
+          <div
+            key={field.ID}
+            style={{
+              gridColumnStart: field.GridColumnStart,
+              gridColumnEnd: "span " + field.GridColumnSpan
+            }}
+            className="ContactField"
+          >
+            {
+              field.Component === "TextField" ?
+                <Material.TextField
+                  id={field.ID}
+                  type={field.Type}
+                  label={field.Label}
+                  required={field.Required}
+                  onChange={handleFieldChange}
+                  value={formData[field.ID] ?? ""}
+                  multiline={field.Multiline}
+                  rows={field.Rows}
+                  error={formError && !fieldValid(field)}
+                  helperText={formError && !fieldValid(field) ?
+                    field.HelperText : null}
+                  fullWidth
+                  variant="outlined"
+                /> :
+                field.Component === "Select" ?
+                  <Material.FormControl
+                    id={field.ID}
+                    variant="filled"
+                    fullWidth
+                    required={field.Required}
+                    error={formError && !fieldValid(field)}
+                  >
+                    <Material.InputLabel
+                      id={field.ID + "-label"}
+                    >
+                      {field.Label}
+                    </Material.InputLabel>
+                    <Material.Select
+                      id={field.ID}
+                      name={field.ID}
+                      labelId={field.ID + "-label"}
+                      value={formData[field.ID] ?? ""}
+                      onChange={handleFieldChange}
+                    >
+                      {field.Items.map(item =>
+                        <Material.MenuItem
+                          key={item}
+                          value={item}
+                        >
+                          {item}
+                        </Material.MenuItem>
+                      )}
+                    </Material.Select>
+                    <Material.FormHelperText>
+                      {formError && !fieldValid(field) ?
+                        field.HelperText : null}
+                    </Material.FormHelperText>
+                  </Material.FormControl> : null
+            }
+          </div>
+        )}
+      </div>
+      <div className="ActionButton">
+        <Material.Button
+          fullWidth
+          variant="contained"
+          color="secondary"
+          size="large"
+          onClick={handleSendClick}
+        >
+          {Data.Contact.Button}
+        </Material.Button>
+      </div>
+    </React.Fragment>
+  );
+
+  const infoCard = (
+    <div
+      className="InfoCard"
+      style={{
+        backgroundColor:
+          message === MessageState.Error ?
+            "#fff2cf" : "#ddffdd"
+      }}
+    >
+      {message === MessageState.Error ?
+        <Icon style={{
+          fontSize: "60px",
+          color: "red",
+          marginBottom: "10px"
+        }}>
+          highlight_off
+        </Icon> :
+        <Icon style={{
+          fontSize: "60px",
+          color: "green",
+          marginBottom: "10px"
+        }}>
+          check_circle
+        </Icon>
+      }
+      <span className="GrayText">
+        <Material.Typography>
+          {message === MessageState.Error ?
+            Data.Dialog.SubmitFail.Message :
+            Data.Dialog.SubmitSuccess.Message}
+        </Material.Typography>
+      </span>
+    </div>
+  );
+
   /* 
   ====================
     RENDER
@@ -125,29 +256,25 @@ function App() {
   */
 
   return (
-    <div className="Page">
-      <div className="BodyWrap">
+    <div id="page">
+      <div id="body-wrap">
 
         {/* Navigation bar */}
-        <div
-          id="top"
-          className="Top"
-        />
+        <div id="top" />
         <Material.AppBar
           id="nav"
           elevation={shadowNav ? 3 : 0}
-          className="AppBar"
           position="sticky"
         >
-          <Material.Toolbar className="NavBar">
+          <Material.Toolbar id="nav-bar">
             <span className="NavItems">
               <img
-                className="NavLogo"
+                id="nav-logo"
                 alt="Logo"
                 src={Data.Meta.Logo}
               />
               <Material.Typography
-                className="NavTitle"
+                id="nav-title"
                 variant="h6"
               >
                 {Data.Meta.Owner}
@@ -157,7 +284,7 @@ function App() {
               {Data.Meta.Anchors.map(anchor =>
                 <Material.Button
                   key={anchor.Name}
-                  id={anchor.Name}
+                  id={anchor.ID}
                   className="AnchorButton"
                   variant={anchor.Variant}
                   color={anchor.Color}
@@ -173,23 +300,21 @@ function App() {
         </Material.AppBar>
 
         {/* Header/hero */}
-        <div
-          className="AboutSection"
-        >
+        <div id="about-section">
           <div
-            className="Hero"
+            id="hero"
             style={{ backgroundImage: "url(" + Data.Header.Hero + ")" }}
           />
           <Material.Typography
+            id="title"
             variant="h1"
             paragraph
-            className="Header"
           >
             {Data.Header.Title}
           </Material.Typography>
           <Material.Typography
+            id="subtitle"
             variant="h4"
-            className="Subtitle"
           >
             {Data.Header.SubtitlePrefix}
             <TextTransition
@@ -201,7 +326,7 @@ function App() {
         </div>
 
         {/* Attributes */}
-        <div className="AttributesSection Content">
+        <div id="attributes-section" className="Content">
           <div className="Attributes">
             {Data.Attributes.map(attr =>
               <div
@@ -239,10 +364,10 @@ function App() {
             )}
           </div>
         </div>
-        <div className="SectionSpacer"/>
+        <div className="SectionSpacer" />
 
         {/* Project portfolio */}
-        <div className="Content" id="portfolio">
+        <div className="Content" id="portfolio-section">
           <Material.Typography
             variant="h3"
             paragraph
@@ -258,48 +383,48 @@ function App() {
           <div className="PortfolioTiles">
             {Data.Portfolio.Projects.map(project =>
               project.Enabled ?
-              <div
-                key={project.Title}
-                className="PortfolioProject"
-                style={{
-                  backgroundImage: "url(" + project.Image + ")",
-                  backgroundColor: "#00b9ff",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center"
-                }}
-              >
                 <div
-                  className="Darken FullHeight"
-                  onClick={() => project.Enabled ?
-                    handleLink(project.Link) :
-                    null}
+                  key={project.Title}
+                  className="PortfolioProject"
+                  style={{
+                    backgroundImage: "url(" + project.Image + ")",
+                    backgroundColor: "#00b9ff",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center"
+                  }}
                 >
-                  <div className="ProjectTypography">
-                    <Material.Typography variant="h6">
-                      {project.Title}
-                    </Material.Typography>
-                    <Material.Typography
-                      variant="caption"
-                      style={{ textTransform: "uppercase" }}
-                    >
-                      {project.Year}
-                    </Material.Typography>
-                    <Material.Typography
-                      variant="subtitle2"
-                      style={{ opacity: 0.8 }}
-                    >
-                      {project.Description}
-                    </Material.Typography>
+                  <div
+                    className="Darken FullHeight"
+                    onClick={() => project.Enabled ?
+                      handleLink(project.Link) :
+                      null}
+                  >
+                    <div className="ProjectTypography">
+                      <Material.Typography variant="h6">
+                        {project.Title}
+                      </Material.Typography>
+                      <Material.Typography
+                        variant="caption"
+                        style={{ textTransform: "uppercase" }}
+                      >
+                        {project.Year}
+                      </Material.Typography>
+                      <Material.Typography
+                        variant="subtitle2"
+                        style={{ opacity: 0.8 }}
+                      >
+                        {project.Description}
+                      </Material.Typography>
+                    </div>
                   </div>
-                </div>
-              </div> : null
+                </div> : null
             )}
           </div>
         </div>
-        <div className="SectionSpacer"/>
+        <div className="SectionSpacer" />
 
         {/* Contact form */}
-        <div className="Content" id="contact">
+        <div className="Content" id="contact-section">
           <Material.Typography
             variant="h3"
             paragraph
@@ -312,106 +437,16 @@ function App() {
               {Data.Contact.Description}
             </Material.Typography>
           </span>
-          <div className="ContactFields">
+          {message === MessageState.Initial ?
+            contactForm :
+            message === MessageState.Sending ?
+              <Material.CircularProgress size={60} /> :
+              infoCard}
 
-            {/* Reusable dialog */}
-            <Material.Dialog
-              open={dialog}
-              onClose={handleDialogClose}
-            >              
-              <Material.DialogTitle>
-                {dialogTitle}
-              </Material.DialogTitle>
-              <Material.DialogContent>
-                <Material.DialogContentText>
-                  {dialogMessage}
-                </Material.DialogContentText>
-              </Material.DialogContent>
-              <Material.DialogActions>
-                <Material.Button onClick={handleDialogClose}>
-                  Dismiss
-                </Material.Button>
-              </Material.DialogActions>
-            </Material.Dialog>
-            {Data.Contact.Fields.map(field =>
-              <div
-                key={field.ID}
-                style={{
-                  gridColumnStart: field.GridColumnStart,
-                  gridColumnEnd: "span " + field.GridColumnSpan
-                }}
-                className="ContactField"
-              >
-                {
-                  field.Component === "TextField" ?
-                    <Material.TextField
-                      id={field.ID}
-                      type={field.Type}
-                      label={field.Label}
-                      required={field.Required}
-                      onChange={handleFieldChange}
-                      value={formData[field.ID] ?? ""}
-                      multiline={field.Multiline}
-                      rows={field.Rows}
-                      error={formErrors && !fieldValid(field)}
-                      helperText={formErrors && !fieldValid(field) ?
-                        field.HelperText : null}
-                      fullWidth
-                      variant="outlined"
-                    /> :
-                    field.Component === "Select" ?
-                      <Material.FormControl
-                        id={field.ID}
-                        variant="filled"
-                        fullWidth
-                        required={field.Required}
-                        error={formErrors && !fieldValid(field)}
-                      >
-                        <Material.InputLabel
-                          id={field.ID + "-label"}
-                        >
-                          {field.Label}
-                        </Material.InputLabel>
-                        <Material.Select
-                          id={field.ID}
-                          name={field.ID}
-                          labelId={field.ID + "-label"}
-                          value={formData[field.ID] ?? ""}
-                          onChange={handleFieldChange}
-                        >
-                          {field.Items.map(item =>
-                            <Material.MenuItem
-                              key={item}
-                              value={item}
-                            >
-                              {item}
-                            </Material.MenuItem>
-                          )}
-                        </Material.Select>
-                        <Material.FormHelperText>
-                          {formErrors && !fieldValid(field) ?
-                            field.HelperText : null}
-                        </Material.FormHelperText>
-                      </Material.FormControl> : null
-                }
-              </div>
-            )}
-          </div>
-          <div className="SendButton">
-            <Material.Button
-              fullWidth
-              variant="contained"
-              color="secondary"
-              size="large"
-              onClick={handleSendClick}
-            >
-              {Data.Contact.Button}
-            </Material.Button>
-          </div>
         </div>
       </div>
-      
-      <footer className="Footer">
+
+      <footer id="footer">
         <div className="Content GrayText">
           <Material.Typography>
             {Data.Footer.Copyright.replace("{year}", new Date().getFullYear())}
