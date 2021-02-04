@@ -175,6 +175,14 @@
                 "Enabled": true
             },
             {
+                "Title": "Kirch's Korner",
+                "Year": "2020",
+                "Description": "A modified WordPress site for Kirch's Korner Used Furniture.",
+                "Image": "projects/kirchs-korner.png",
+                "Link": "http://kirchskorner.com",
+                "Enabled": true
+            },
+            {
                 "Title": "PDF2IMG",
                 "Year": "2020",
                 "Description": "A Windows app that converts a PDF document to an image or images.",
@@ -204,14 +212,6 @@
                 "Description": "An automated lab management tool that configures and controls rocket simulations.",
                 "Image": "projects/maestro.png",
                 "Link": "https://www.nasa.gov/sites/default/files/files/FlightSoftware.pdf",
-                "Enabled": true
-            },
-            {
-                "Title": "Kirch's Korner",
-                "Year": "2017",
-                "Description": "A modified WordPress site for Kirch's Korner Used Furniture.",
-                "Image": "projects/kirchs-korner.png",
-                "Link": "http://kirchskorner.com",
                 "Enabled": true
             },
             {
