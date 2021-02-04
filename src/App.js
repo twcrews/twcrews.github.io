@@ -440,7 +440,10 @@ function App() {
           {message === MessageState.Initial ?
             contactForm :
             message === MessageState.Sending ?
-              <Material.CircularProgress size={60} /> :
+              <Material.CircularProgress
+                size={60}
+                style={{ marginTop: "30px" }} 
+              /> :
               infoCard}
 
         </div>
