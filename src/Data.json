@@ -286,7 +286,7 @@
         ]
     },
     "Footer": {
-        "Copyright": "Copyright © {year} Tommy Crews",
+        "Copyright": "Copyright © {year} Crews Development",
         "Subtext": "Created from scratch with React",
         "PromotionText": "View Source",
         "PromotionLink": "https://github.com/twcrews/twcrews.github.io"
