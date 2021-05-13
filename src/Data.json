@@ -154,12 +154,12 @@
                 "FullWidth": true
             },
             {
-                "Title": "Paycom Data Management",
-                "Year": "2020",
-                "Description": "A web application for safely and effectively executing data fixes.",
-                "Image": "projects/data-management.png",
-                "Link": "https://www.crews.dev/pcm-data-management",
-                "Enabled": false
+                "Title": "Rotato Chip",
+                "Year": "2021",
+                "Description": "A Windows app for restoring monitor rotation hotkey functionality.",
+                "Image": "projects/rotatochip.png",
+                "Link": "https://github.com/twcrews/RotatoChip",
+                "Enabled": true
             },
             {
                 "Title": "bCards",
